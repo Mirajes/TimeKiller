@@ -12,23 +12,30 @@ public class PlayerController : MonoBehaviour
 
     [Header("Look")]
     [SerializeField] private float _mouseSensivity = 1f;
-    [SerializeField] [Range(30, 113)] private float _fieldOfView = 90f;
-    [SerializeField] private Vector3 _cameraOffset = new Vector3(0f, 1.2f, 0f);
+    [SerializeField] [Range(30, 113)] private float _fieldOfView = 80f;
+    [SerializeField] private Vector3 _cameraOffset = new Vector3(0f, 0.6f, 0f);
     private Vector2 _cameraInput;
     private float _cameraVerticalAngle = 0f;
 
     [Header("Movement")]
-    [SerializeField] private float _walkSpeed = 1f;
-    [SerializeField] private float _runSpeed = 3f; // ? need or not
+    [SerializeField] private float _walkSpeed = 3f;
     private Vector2 _moveInput;
     // maybe add _moveSpeed that need to be filled for max speed by time
 
     [Header("Jump")]
-    [SerializeField] private float _jumpPower = 3f;
+    [SerializeField] private float _jumpPower = 5f;
     [SerializeField] private float _gravityMultiplier = 1f;
     private float _velocity_Y = 0;
     private bool _isJumping;
     public bool IsGrounded => _controller.isGrounded;
+
+    //[Header("Crouch")]
+    //[SerializeField] private float 
+
+    [Header("Dash")]
+    [SerializeField] private float _dashDistance = 3f;
+    [SerializeField] private float _dashTime = 0.1f;
+    private Vector2 _dashVelocity;
 
     private void Update()
     {
@@ -59,6 +66,11 @@ public class PlayerController : MonoBehaviour
     {
         _isJumping = context.ReadValueAsButton();
         // maybe invoke action/unitask for double jump etc
+    }
+
+    public void OnCrouchInput(InputAction.CallbackContext context)
+    {
+
     }
     #endregion
 
@@ -104,6 +116,16 @@ public class PlayerController : MonoBehaviour
             );
 
         _controller.Move(move * Time.deltaTime);
+    }
+
+    private void HandleCrouch()
+    {
+
+    }
+
+    private void HandleDash()
+    {
+        float iHateYellow = _dashDistance + _dashTime;
     }
 
     #endregion
