@@ -20,7 +20,7 @@ public class InputHandler
         _inputs.Player.Jump.canceled += playerController.OnJumpInput;
     }
 
-    public void RemoveInputs(PlayerController playerController) 
+    public void RemoveInputs(PlayerController playerController)
     {
         _inputs.Player.Move.performed -= playerController.OnMoveInput;
         _inputs.Player.Move.canceled -= playerController.OnMoveInput;
