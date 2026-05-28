@@ -27,4 +27,14 @@ public class GameManager : MonoBehaviour
         _inputHandler.Inputs?.Dispose();
         // ???
     }
+
+    private void StartGame()
+    {
+
+    }
+
+    private void FinishGame()
+    {
+
+    }
 }

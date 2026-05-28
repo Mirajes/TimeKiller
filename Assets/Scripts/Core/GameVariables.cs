@@ -1,8 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class GameVariables
+public static class GameVariables
 {
-    public static float Gravity => _gravity;
-    [SerializeField] private static float _gravity = -9.81f;
+    public const float Gravity = -9.81f;
 }

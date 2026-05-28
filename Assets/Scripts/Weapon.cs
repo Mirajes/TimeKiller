@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    protected WeaponData _data;
+    protected Weapon_SO _data;
+    
 
     public virtual void Shoot(RaySettings raySettings)
     {

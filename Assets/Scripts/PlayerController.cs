@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _dashTime = 0.1f;
     private Vector2 _dashVelocity;
 
+    [Header("Weapon")]
+    [SerializeField] private Weapon _currentWeapon;
+
     private void Update()
     {
         HandleRotation();
@@ -70,6 +73,11 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnCrouchInput(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void OnAttackInput(InputAction.CallbackContext context)
     {
 
     }
