@@ -5275,7 +5275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MaxHealth: 10
   _CurrentHealth: 0
-  _agent: {fileID: 0}
+  _agent: {fileID: 919132148275131274}
 --- !u!195 &919132148275131274
 NavMeshAgent:
   m_ObjectHideFlags: 0
