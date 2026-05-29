@@ -18,6 +18,8 @@ public class InputHandler
 
         _inputs.Player.Jump.performed += playerController.OnJumpInput;
         _inputs.Player.Jump.canceled += playerController.OnJumpInput;
+
+        _inputs.Player.Attack.started += playerController.OnAttackInput;
     }
 
     public void RemoveInputs(PlayerController playerController)
@@ -30,5 +32,7 @@ public class InputHandler
 
         _inputs.Player.Jump.performed -= playerController.OnJumpInput;
         _inputs.Player.Jump.canceled -= playerController.OnJumpInput;
+
+        _inputs.Player.Attack.started -= playerController.OnAttackInput;
     }
 }

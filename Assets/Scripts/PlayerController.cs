@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _dashVelocity;
 
     [Header("Weapon")]
-    [SerializeField] private Weapon _currentWeapon;
+    [SerializeField] private A_Weapon _currentWeapon;
 
     private void Update()
     {
@@ -79,7 +79,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
-
+        if (context.started)
+            _currentWeapon.Shoot();
     }
     #endregion
 

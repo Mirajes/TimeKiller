@@ -4,8 +4,8 @@ public class Box : MonoBehaviour, IDamageable
 {
     [SerializeField] private HealthBar _healthBar;
 
-    private float _maxHealth = 3;
-    private float _currentHealth;
+    [SerializeField] private float _maxHealth = 3;
+    [SerializeField] private float _currentHealth;
 
     private void OnEnable()
     {
@@ -16,5 +16,15 @@ public class Box : MonoBehaviour, IDamageable
     {
         _currentHealth -= damage;
         _healthBar.ChangeValue(_currentHealth, _maxHealth);
+
+        if (_currentHealth <= 0)
+        {
+            DestroyBox();
+        }
+    }
+
+    private void DestroyBox()
+    {
+        Destroy(this.gameObject);
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Weapon_SO", menuName = "Scriptable Objects/Weapon_SO")]
-public class Weapon_SO : ScriptableObject
+public class SO_Weapon : ScriptableObject
 {
     [SerializeField] private string _name;
     [SerializeField] private float _damage;
