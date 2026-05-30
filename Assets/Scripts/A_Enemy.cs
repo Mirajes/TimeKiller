@@ -12,7 +12,7 @@ public abstract class A_Enemy : MonoBehaviour, IDamageable
     [SerializeField] protected float _TimeToDie;
     [SerializeField] protected float _CurrentTime;
 
-    [SerializeField] protected NavMeshAgent _agent;
+    [SerializeField] protected NavMeshAgent _Agent;
     [SerializeField] private HealthBar _healthBar;
     protected CancellationTokenSource _aliveCTS;
 
@@ -49,11 +49,11 @@ public abstract class A_Enemy : MonoBehaviour, IDamageable
 
         if (_CurrentHealth <= 0)
         {
-            OnDeath();
+            Death();
         }
     }
 
-    protected virtual void OnDeath()
+    protected virtual void Death()
     {
         _aliveCTS?.Cancel();
         _aliveCTS?.Dispose();
@@ -72,9 +72,15 @@ public abstract class A_Enemy : MonoBehaviour, IDamageable
 
     protected virtual async UniTask CountdownToDieTask(CancellationToken token)
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(_TimeToDie), cancellationToken: token);
+        while (_CurrentTime > 0)
+        {
+            token.ThrowIfCancellationRequested();
 
-        OnDeath();
+            await UniTask.NextFrame();
+            _CurrentTime -= Time.deltaTime;
+        }
+
+        Death();
     }
 }
 

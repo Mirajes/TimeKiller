@@ -16,9 +16,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CameraManagment _cameraManagment;
 
     [Header("Stages")]
-    [SerializeField] private List<A_Stage> _stages = new();
-    [SerializeField] private int _stageCount = 3;
+    [SerializeField] private A_Stage _starterStage;
+    [SerializeField] private List<A_Stage> _stagePrefabs = new();
     [SerializeField] private List<A_Stage> _runStages = new();
+    [SerializeField] private int _stageCount = 3;
+    private int _currentStage = 0;
 
     [Header("State")]
     private bool _isRunning = false;
@@ -94,6 +96,7 @@ public class GameManager : MonoBehaviour
     private void Reset()
     {
         _runStages.Clear();
+        _currentStage = 0;
 
         _isWon = false;
         _uiManager.SetActiveGameInterface(false);
@@ -112,13 +115,11 @@ public class GameManager : MonoBehaviour
         _isRunning = true;
         _cameraManagment.ViewCamera.targetDisplay = 1;
 
-        _playerController = Instantiate(_playerController, _spawnPos.position, _spawnPos.rotation);
-
         _currentTime = _startTime_BASE;
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = true;
         _uiManager.SetActiveGameInterface(true);
+
+        _playerController = Instantiate(_playerController, _spawnPos.position, _spawnPos.rotation);
 
         _inputHandler.InitInputs(_playerController);
         _inputHandler.Inputs.Enable();
@@ -156,18 +157,24 @@ public class GameManager : MonoBehaviour
 
     private void InitGame()
     {
-        for (int i = 0; i < _stageCount; i++)
+        int i = 0;
+
+        _runStages.Add(_starterStage);
+        i++;
+
+        while (i < _stageCount)
         {
-            int randomIndex = UnityEngine.Random.Range(0, _stages.Count);
-            _runStages.Add(_stages[randomIndex]);
+            int randomIndex = UnityEngine.Random.Range(0, _stagePrefabs.Count);
+            _runStages.Add(_stagePrefabs[randomIndex]);
+            i++;
         }
 
-        
+        StageNext?.Invoke();
     }
 
     private void OnStageNext()
     {
-
+        
     }
 
     private void Restart()
