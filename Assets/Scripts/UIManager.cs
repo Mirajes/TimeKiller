@@ -25,8 +25,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button _settingsButtonMenu;
     [SerializeField] private Button _creditButton;
     [SerializeField] private Button _exitButton_fromGame;
+    [SerializeField] private Button _toMenuButton_finishScreen;
     [SerializeField] private RectTransform _menuWindow;
     [SerializeField] private RectTransform _characterWindow;
+    [SerializeField] private RectTransform _finishScreen;
 
     private void OnEnable()
     {
@@ -63,24 +65,29 @@ public class UIManager : MonoBehaviour
     private void OnTimeEarn(float time)
     {
         var newPopUp = Instantiate(_timePopUpPrefab, _timePopUpSpawn);
-        newPopUp.Init(time);
+        newPopUp.Init(time, true);
     }
 
     private void OnTimeUse(float time)
     {
         var newPopUp = Instantiate(_timePopUpPrefab, _timePopUpSpawn);
-        newPopUp.Init(time);
+        newPopUp.Init(time, false);
     }
 
     public void UpdateTimer(float time)
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(time);
-        _timer.text = $"{timeSpan.Minutes}:{timeSpan.Seconds:D2}";
+        if (time > 0)
+            _timer.text = $"{timeSpan.Minutes}:{timeSpan.Seconds:D2}";
+        else
+            _timer.text = $"-{-timeSpan.Minutes}:{-timeSpan.Seconds:D2}";
     }
 
     public void SetActiveGameInterface(bool isEnabled)
     {
         _timer.transform.parent.gameObject.SetActive(isEnabled); // :)
         _healthBar.gameObject.SetActive(isEnabled);
+
+        _crosshair.gameObject.SetActive(isEnabled);
     }
 }

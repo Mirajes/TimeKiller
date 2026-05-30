@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
@@ -14,8 +15,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private CameraManagment _cameraManagment;
 
+    [Header("Stages")]
+    [SerializeField] private List<A_Stage> _stages = new();
+    [SerializeField] private int _stageCount = 3;
+    [SerializeField] private List<A_Stage> _runStages = new();
+
     [Header("State")]
     private bool _isRunning = false;
+    private bool _isWon = false;
 
     [Header("Time")]
     [SerializeField] private float _startTime_BASE = 150f;
@@ -25,7 +32,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private Transform _spawnPos;
 
+    [Header("Player")]
+    [SerializeField] private float _maxHealth = 100;
+    [SerializeField] private float _currentHealth;
+    [SerializeField] private float _damageSpeed = 3f;
+
     public static Action StartRun;
+    public static Action EndRun;
+    public static Action StageNext;
     public static Action<float, float> HealthChange; // current, max
     public static Action<float> TimeUse;
     public static Action<float> TimeEarn;
@@ -55,6 +69,8 @@ public class GameManager : MonoBehaviour
         StartRun += OnStartRun;
         TimeEarn += OnTimeEarn;
         TimeUse += OnTimeUse;
+
+        EndRun += FinishGame;
     }
 
     private void OnDisable()
@@ -62,6 +78,8 @@ public class GameManager : MonoBehaviour
         StartRun -= OnStartRun;
         TimeEarn -= OnTimeEarn;
         TimeUse -= OnTimeUse;
+
+        EndRun -= FinishGame;
     }
 
     private void OnDestroy()
@@ -71,6 +89,20 @@ public class GameManager : MonoBehaviour
         _inputHandler.RemoveInputs(_playerController);
         _inputHandler.Inputs?.Dispose();
         // ???
+    }
+
+    private void Reset()
+    {
+        _runStages.Clear();
+
+        _isWon = false;
+        _uiManager.SetActiveGameInterface(false);
+
+        _isRunning = false;
+        _currentTime = 0f;
+
+        _cts?.Cancel();
+        _cts?.Dispose();
     }
 
     private void OnStartRun()
@@ -111,6 +143,31 @@ public class GameManager : MonoBehaviour
         _cameraManagment.ViewCamera.targetDisplay = 0;
 
         _uiManager.SetActiveGameInterface(false);
+
+        if (_isWon)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+
+    private void InitGame()
+    {
+        for (int i = 0; i < _stageCount; i++)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, _stages.Count);
+            _runStages.Add(_stages[randomIndex]);
+        }
+
+        
+    }
+
+    private void OnStageNext()
+    {
+
     }
 
     private void Restart()
@@ -120,23 +177,22 @@ public class GameManager : MonoBehaviour
         OnStartRun();
     }
 
-    private void Reset()
-    {
-        _uiManager.SetActiveGameInterface(false);
-
-        _isRunning = false;
-        _currentTime = 0f;
-
-        _cts?.Cancel();
-        _cts?.Dispose();
-    }
-
     private async UniTask CountdownTask(CancellationToken token)
     {
         while (_isRunning)
         {
             await UniTask.NextFrame();
             _currentTime -= Time.deltaTime;
+
+            if (_currentTime < 0)
+            {
+                _currentHealth -= Time.deltaTime * _damageSpeed;
+                if (_currentHealth < 0)
+                {
+                    EndRun?.Invoke();
+                    return;
+                }
+            }
 
             _uiManager.UpdateTimer(_currentTime);
         }

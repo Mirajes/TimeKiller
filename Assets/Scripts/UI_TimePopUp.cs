@@ -7,16 +7,22 @@ public class UI_TimePopUp : MonoBehaviour
     [SerializeField] private float _timeToDissappear = 0.3f;
     [SerializeField] private TMP_Text _timeField;
 
-    public void Init(float timeToText)
+    public void Init(float timeToText, bool isGiven)
     {
-        timeToText = -timeToText;
-
-        if (timeToText >= 0)
-            _timeField.color = Color.green;
+        string text = string.Empty;
+        if (isGiven)
+        {
+            _timeField.color = Color.green; 
+            text += "+"; 
+        }
         else
+        {
             _timeField.color = Color.red;
+            text += "-"; 
+        }
 
-        _timeField.text = timeToText.ToString("F2");
+        text += timeToText.ToString("F2");
+        _timeField.text = text;
         CountToDissappearTask().Forget();
     }
 

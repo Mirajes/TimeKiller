@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4466225252465652816}
   - component: {fileID: 7137451904030721586}
   - component: {fileID: 4139229425054410481}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ MonoBehaviour:
   _mouseSensivity: 0.25
   _fieldOfView: 80
   _cameraOffset: {x: 0, y: 0.6, z: 0}
-  _walkSpeed: 5
+  _walkSpeed: 7
   _jumpPower: 5
   _gravityMultiplier: 1
   _dashDistance: 3

@@ -158,7 +158,12 @@ public class PlayerController : MonoBehaviour
         
         Rigidbody rb = hit.collider.attachedRigidbody;
 
-        if (rb == null || rb.isKinematic || rb.mass <= _minPushMass || rb.mass >= _maxPushMass)
+        if (
+            rb == null
+            || rb.isKinematic
+            || rb.mass <= _minPushMass
+            || rb.mass >= _maxPushMass
+            )
             return;
 
         if (hit.moveDirection.y < -0.3f) 

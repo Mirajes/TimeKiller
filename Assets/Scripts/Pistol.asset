@@ -15,7 +15,7 @@ MonoBehaviour:
   _name: Pistol
   _damage: 1
   _distance: Infinity
-  _timeCostPerBullet: 0.5
+  _timeCostPerBullet: 1
   _hitLayers:
     serializedVersion: 2
     m_Bits: 0

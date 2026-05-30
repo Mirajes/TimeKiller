@@ -26,4 +26,5 @@ public abstract class A_Weapon : MonoBehaviour
             damageMe?.HandleHit(_Data.Damage);
         }
     }
+    
 }
