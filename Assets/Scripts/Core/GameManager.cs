@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
         TimeEarn += OnTimeEarn;
         TimeUse += OnTimeUse;
 
+        StageNext += OnStageNext;
+
         EndRun += FinishGame;
     }
 
@@ -80,6 +82,8 @@ public class GameManager : MonoBehaviour
         StartRun -= OnStartRun;
         TimeEarn -= OnTimeEarn;
         TimeUse -= OnTimeUse;
+
+        StageNext -= OnStageNext;
 
         EndRun -= FinishGame;
     }
@@ -110,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     private void OnStartRun()
     {
-        if (_isRunning) return;
+        if (_isRunning) return; // what reason?
 
         _isRunning = true;
         _cameraManagment.ViewCamera.targetDisplay = 1;
@@ -174,7 +178,7 @@ public class GameManager : MonoBehaviour
 
     private void OnStageNext()
     {
-        
+
     }
 
     private void Restart()
