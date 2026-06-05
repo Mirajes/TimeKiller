@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraManagment : MonoBehaviour
+public class CameraManager : MonoBehaviour
 {
     public Camera ViewCamera => _viewCamera;
     

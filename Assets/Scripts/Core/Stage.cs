@@ -72,17 +72,10 @@ public class Portal : MonoBehaviour
     }
 }
 
-public class Stage_LVL1 : A_Stage
-{
+public class Stage_Starter : A_Stage { }
 
-}
+public class Stage_LVL1 : A_Stage { }
 
-public class Stage_LVL2 : A_Stage
-{
+public class Stage_LVL2 : A_Stage { }
 
-}
-
-public class Stage_BossLVL1 : A_Stage
-{
-
-}
+public class Stage_BossLVL1 : A_Stage { }

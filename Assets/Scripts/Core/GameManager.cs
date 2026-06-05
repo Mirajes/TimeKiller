@@ -1,13 +1,52 @@
-using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
-/*
-rename all Vars and fields
-*/
+public class GameManager : MonoBehaviour
+{
+    [Header("Links")]
+    [SerializeField] private UIManager _uiManager;
 
+    [SerializeField] private StageManagement _stageManagement = new();
+    private InputHandler _inputHandler = new();
+
+    // remake
+    public static Action<float, float> HealthChange;
+    public static Action<float> TimeEarn;
+    public static Action<float> TimeUse;
+    public static Action StartRun;
+    //
+}
+
+[System.Serializable]
+public class StageManagement
+{
+    [SerializeField] private Stage_Starter _starterStage;
+    [SerializeField] private List<A_Stage> _stages;
+
+    [SerializeField] private int _currentStage = 0;
+}
+
+public interface IState
+{
+    void Enter();
+    void Execute();
+    void Exit();
+}
+
+public class StateMachine
+{
+
+}
+
+[System.Serializable]
+public class Timer
+{
+    [SerializeField] private float _starterTime;
+    [SerializeField] private float _currentTime;
+}
+
+/*
 public class GameManager : MonoBehaviour
 {
     private InputHandler _inputHandler = new();
@@ -55,7 +94,7 @@ public class GameManager : MonoBehaviour
     {
         _inputHandler.Init();
 
-        if ( _debug_IsPlaying )
+        if (_debug_IsPlaying)
         {
             OnStartRun();
         }
@@ -209,3 +248,5 @@ public class GameManager : MonoBehaviour
         }
     }
 }
+
+*/
