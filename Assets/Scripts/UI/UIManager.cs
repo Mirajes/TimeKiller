@@ -5,34 +5,34 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("Game")]
-    [SerializeField] private Canvas _gameCanvas;
-    [SerializeField] private Button _resumeButton;
-    [SerializeField] private Button _settingsButton;
-    [SerializeField] private Button _exitButton_fromRun;
-    [SerializeField] private RectTransform _pauseWindow;
-    [SerializeField] private RectTransform _settingsWindow;
+    //[Header("Game")]
+    //[SerializeField] private Canvas _gameCanvas;
+    //[SerializeField] private Button _resumeButton;
+    //[SerializeField] private Button _settingsButton;
+    //[SerializeField] private Button _exitButton_fromRun;
+    //[SerializeField] private RectTransform _pauseWindow;
+    //[SerializeField] private RectTransform _settingsWindow;
     [SerializeField] private Image _crosshair;
     [SerializeField] private UI_HealthBar _healthBar;
     [SerializeField] private UI_TimePopUp _timePopUpPrefab;
     [SerializeField] private RectTransform _timePopUpSpawn;
     [SerializeField] private TMP_Text _timer;
 
-    [Header("Menu")]
-    [SerializeField] private Canvas _menuCanvas;
-    [SerializeField] private Button _playButton;
-    [SerializeField] private Button _toCharacterListButton;
-    [SerializeField] private Button _settingsButtonMenu;
-    [SerializeField] private Button _creditButton;
-    [SerializeField] private Button _exitButton_fromGame;
-    [SerializeField] private Button _toMenuButton_finishScreen;
-    [SerializeField] private RectTransform _menuWindow;
-    [SerializeField] private RectTransform _characterWindow;
-    [SerializeField] private RectTransform _finishScreen;
+    //[Header("Menu")]
+    //[SerializeField] private Canvas _menuCanvas;
+    //[SerializeField] private Button _playButton;
+    //[SerializeField] private Button _toCharacterListButton;
+    //[SerializeField] private Button _settingsButtonMenu;
+    //[SerializeField] private Button _creditButton;
+    //[SerializeField] private Button _exitButton_fromGame;
+    //[SerializeField] private Button _toMenuButton_finishScreen;
+    //[SerializeField] private RectTransform _menuWindow;
+    //[SerializeField] private RectTransform _characterWindow;
+    //[SerializeField] private RectTransform _finishScreen;
 
     private void OnEnable()
     {
-        _playButton.onClick.AddListener(StartRun);
+        //_playButton.onClick.AddListener(StartRun);
 
         GameManager.HealthChange += OnHealthChange;
         GameManager.TimeEarn += OnTimeEarn;
@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
 
     private void OnDisable()
     {
-        _playButton.onClick.RemoveAllListeners();
+        //_playButton.onClick.RemoveAllListeners();
 
         GameManager.HealthChange -= OnHealthChange;
         GameManager.TimeEarn -= OnTimeEarn;
@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
         GameManager.StartRun?.Invoke();
 
         //_gameCanvas.gameObject.SetActive(true);
-        _menuCanvas.gameObject.SetActive(false);
+        //_menuCanvas.gameObject.SetActive(false);
         
     }
 
