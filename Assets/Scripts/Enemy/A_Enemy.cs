@@ -82,6 +82,11 @@ public abstract class A_Enemy : MonoBehaviour, IDamageable
 
         Death();
     }
+
+    protected virtual void MakeSound()
+    {
+
+    }
 }
 
 //public class HitBox : MonoBehaviour

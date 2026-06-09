@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UI_Manager : MonoBehaviour
 {
     //[Header("Game")]
     //[SerializeField] private Canvas _gameCanvas;

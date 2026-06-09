@@ -7,8 +7,9 @@ using UnityEngine.Rendering;
 public class GameManager : MonoBehaviour
 {
     [Header("Links")]
-    [SerializeField] private UIManager _uiManager;
+    [SerializeField] private UI_Manager _uiManager;
 
+    [Header("Stage")]
     [SerializeField] private StageManagement _stageManagement = new();
     private InputHandler _inputHandler = new();
 
@@ -57,9 +58,9 @@ public static class SaveManager
     public static Action<SaveData> Save;
     public static Action<SaveData> Load;
 
-    //public static void SaveGame(SaveData data) { }
+    public static void SaveGameData(SaveData data) { }
 
-    //public static void LoadGame(SaveData data) { }
+    public static void LoadGameData(SaveData data) { }
 }
 
 [System.Serializable]
@@ -72,9 +73,4 @@ public interface ISaveable
 {
     void OnSave(SaveData data);
     void OnLoad(SaveData data);
-}
-
-public class AudioManager : MonoBehaviour
-{
-
 }
