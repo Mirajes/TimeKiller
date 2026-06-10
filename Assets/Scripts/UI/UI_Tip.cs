@@ -10,6 +10,8 @@ public class UI_Tip : MonoBehaviour
 
     public void UpdateTip(string text = "", bool isActive = false)
     {
+        if (gameObject == null) return;
+
         if (isActive)
         {
             _textField.text = text;

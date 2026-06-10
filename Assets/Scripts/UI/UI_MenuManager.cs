@@ -11,8 +11,7 @@ public class UI_MenuManager : MonoBehaviour
 
     [Header("SettingsMenu")]
     [SerializeField] private Button _toSettings;
-    [SerializeField] private Button _fromSettings;
-    [SerializeField] private UI_Settings _settingsWindow;
+    [SerializeField] private UI_Settings _settings;
 
     [Header("Other")]
     [SerializeField] private Button _exitButton;
@@ -20,24 +19,20 @@ public class UI_MenuManager : MonoBehaviour
 
     private void Awake()
     {
-        _toCharacterList.onClick.AddListener(ToGameScene);
-        _exitButton.onClick.AddListener(ToMenuScene);
+        _settings.Init();
+
+        _toCharacterList.onClick.AddListener(() => SceneLoader("Game"));
+        _exitButton.onClick.AddListener(() => SceneLoader("Menu"));
+
+        _toSettings.onClick.AddListener(_settings.Open);
     }
 
     private void OnDestroy()
     {
         _toCharacterList.onClick.RemoveAllListeners();
         _exitButton.onClick.RemoveAllListeners();
-    }
 
-    private void ToGameScene()
-    {
-        SceneLoader("Game");
-    }
-
-    private void ToMenuScene()
-    {
-        SceneLoader("Menu");
+        _toSettings.onClick.RemoveAllListeners();
     }
 
     private void SceneLoader(string sceneName)

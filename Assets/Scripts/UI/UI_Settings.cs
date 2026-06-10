@@ -1,17 +1,28 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-// settings redo soon to create it on ground. Esc => returning
 
+// settings redo soon to create it on ground. Esc => returning
+// maybe setting anchor position by object will be better
 public class UI_Settings : MonoBehaviour
 {
-    [SerializeField] private RectTransform _settingsWindow;
+    [SerializeField] private RectTransform _settingsRect;
 
+    [Header("DOTween")]
+    [SerializeField] private float _onOffTime = 1f;
+    [SerializeField] private Vector2 _anchorPosition;
+
+    [Header("Buttons")]
+    [SerializeField] private Button _exitButton;
+    [SerializeField] private Button _audioWindowButton;
+
+    [Header("Audio")]
+    [SerializeField] private RectTransform _audioWindow;
     [SerializeField] private Slider _generalVolumeSlider;
     [SerializeField] private Slider _musicVolumeSlider;
     [SerializeField] private Slider _sfxVolumeSlider;
     [SerializeField] private Slider _voiceVolumeSlider;
-
     [SerializeField] private TMP_Text _generalVolumeTMPT;
     [SerializeField] private TMP_Text _musicVolumeTMPT;
     [SerializeField] private TMP_Text _sfxVolumeTMPT;
@@ -21,24 +32,81 @@ public class UI_Settings : MonoBehaviour
 
     private void Awake()
     {
-        _generalVolumeSlider.onValueChanged.AddListener(OnGeneralVolumeChange);
-        _musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChange);
-        _sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChange);
-        _voiceVolumeSlider.onValueChanged.AddListener(OnVoiceVolumeChange);
+        InitVolumeSliders();
+
+        _exitButton.onClick.AddListener(Close);
     }
 
     private void Start()
     {
-        //
-        Debug.Log(AudioManager.Instance);
-        Debug.Log(AudioManager.Instance.MusicVolume);
+        InitValueVolumeSliders();
+    }
+
+    private void OnDestroy()
+    {
+        DeInitVolumeSliders();
+        _exitButton.onClick.RemoveAllListeners();
+
+        DOTween.Kill(_settingsRect);
+    }
+
+    public void Init()
+    {
+        _anchorPosition = _settingsRect.anchoredPosition;
+    }
+
+    public void Open()
+    {
+        DOTween.Kill(_settingsRect);
+
+        _settingsRect.gameObject.SetActive(false);
+
+        Vector2 startPosition = new Vector2(
+            _anchorPosition.x,
+            _anchorPosition.y - Screen.height * 2
+            );
+
+        _settingsRect.anchoredPosition = startPosition;
+
+        _settingsRect.gameObject.SetActive(true);
+
+        _settingsRect.DOAnchorPos(_anchorPosition, _onOffTime);
+    }
+
+    public void Close()
+    {
+        DOTween.Kill(_settingsRect);
+
+        Vector2 endPosition = new Vector2(
+            _anchorPosition.x,
+            _anchorPosition.y - Screen.height * 2
+            );
+
+        _settingsRect.DOAnchorPos(endPosition, _onOffTime).OnComplete(() =>
+        {
+            _settingsRect.gameObject.SetActive(false);
+        });
+    }
+
+    #region Audio
+    private void InitVolumeSliders()
+    {
+        _generalVolumeSlider.onValueChanged.AddListener(OnGeneralVolumeChange);
+        _musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChange);
+        _sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChange);
+        _voiceVolumeSlider.onValueChanged.AddListener(OnVoiceVolumeChange);
+
+    }
+
+    private void InitValueVolumeSliders()
+    {
         SetSliderValue(_generalVolumeSlider, _generalVolumeTMPT, AudioManager.Instance.GeneralVolume);
         SetSliderValue(_musicVolumeSlider, _musicVolumeTMPT, AudioManager.Instance.MusicVolume);
         SetSliderValue(_sfxVolumeSlider, _sfxVolumeTMPT, AudioManager.Instance.SFXVolume);
         SetSliderValue(_voiceVolumeSlider, _voiceVolumeTMPT, AudioManager.Instance.VoiceVolume);
     }
 
-    private void OnDestroy()
+    private void DeInitVolumeSliders()
     {
         _generalVolumeSlider.onValueChanged.RemoveAllListeners();
         _musicVolumeSlider.onValueChanged.RemoveAllListeners();
@@ -46,35 +114,38 @@ public class UI_Settings : MonoBehaviour
         _voiceVolumeSlider.onValueChanged.RemoveAllListeners();
     }
 
+    private void OpenAudioWindow()
+    {
+
+    }
+
     private void SetSliderValue(Slider slider, TMP_Text valueField, float value)
     {
         slider.value = value;
-        valueField.text = (value * 100).ToString("F2");
+        valueField.text = (value * 100).ToString("F0");
     }
 
     private void OnGeneralVolumeChange(float volume)
     {
         AudioManager.Instance.OnGeneralVolumeChange(volume);
-        _generalVolumeTMPT.text = (_generalVolumeSlider.value * 100).ToString("F2");
+        _generalVolumeTMPT.text = (_generalVolumeSlider.value * 100).ToString("F0");
     }
-
     private void OnMusicVolumeChange(float volume)
     {
         AudioManager.Instance.OnMusicVolumeChange(volume);
-        _musicVolumeTMPT.text = (_musicVolumeSlider.value * 100).ToString("F2");
+        _musicVolumeTMPT.text = (_musicVolumeSlider.value * 100).ToString("F0");
 
     }
-
     private void OnSFXVolumeChange(float volume)
     {
         AudioManager.Instance.OnSFXVolumeChange(volume);
-        _sfxVolumeTMPT.text = (_sfxVolumeSlider.value * 100).ToString("F2");
+        _sfxVolumeTMPT.text = (_sfxVolumeSlider.value * 100).ToString("F0");
 
     }
-
     private void OnVoiceVolumeChange(float volume)
     {
         AudioManager.Instance.OnVoiceVolumeChange(volume);
-        _voiceVolumeTMPT.text = (_voiceVolumeSlider.value * 100).ToString("F2");
+        _voiceVolumeTMPT.text = (_voiceVolumeSlider.value * 100).ToString("F0");
     }
+    #endregion
 }

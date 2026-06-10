@@ -9,7 +9,6 @@ public class UI_Adviser : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     [SerializeField] private float _tipWaitTime = 1f;
     private float _tipTime = 0f;
 
-
     [SerializeField] private UI_Tip _tip;
     [SerializeField] private RectTransform _rectTransform;
 
@@ -19,12 +18,14 @@ public class UI_Adviser : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {         
         _cts = new();
 
-        while (!_cts.Token.IsCancellationRequested!)
+        while (_cts != null && !_cts.Token.IsCancellationRequested)
         {
-            await UniTask.Yield();
+            await UniTask.Yield(); // for deltaTime
             _tipTime += Time.deltaTime;
             if (_tipTime >= _tipWaitTime)
             {
+                if (_tip == null) return;
+
                 _tip.UpdateTip(_tipText, true);
                 break;
             }
@@ -37,13 +38,13 @@ public class UI_Adviser : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("enter");
-        CountdownTimeTask().Forget();   
+        CountdownTimeTask().Forget();
+
+        _tip.transform.position = eventData.position;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("exit");
         _cts?.Cancel();
         _cts?.Dispose();
         _cts = null;
@@ -51,10 +52,4 @@ public class UI_Adviser : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         _tip.UpdateTip();
         _tipTime = 0;
     }
-
-    //private void OnMouseOver()
-    //{
-    //    Debug.Log("overall");
-    //    _tip.transform.position = Input.mousePosition;
-    //}
 }
