@@ -1,10 +1,15 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
+    [Header("HUD")]
+    [SerializeField] private Image _crosshair;
+    [SerializeField] private TMP_Text _ammoField;
+    [SerializeField] private UI_HealthBar _healthBar;
+    [SerializeField] private UI_Timer _timer;
+
     //[Header("Game")]
     //[SerializeField] private Canvas _gameCanvas;
     //[SerializeField] private Button _resumeButton;
@@ -12,11 +17,6 @@ public class UI_Manager : MonoBehaviour
     //[SerializeField] private Button _exitButton_fromRun;
     //[SerializeField] private RectTransform _pauseWindow;
     //[SerializeField] private RectTransform _settingsWindow;
-    [SerializeField] private Image _crosshair;
-    [SerializeField] private UI_HealthBar _healthBar;
-    [SerializeField] private UI_TimePopUp _timePopUpPrefab;
-    [SerializeField] private RectTransform _timePopUpSpawn;
-    [SerializeField] private TMP_Text _timer;
 
     //[Header("Menu")]
     //[SerializeField] private Canvas _menuCanvas;
@@ -35,8 +35,8 @@ public class UI_Manager : MonoBehaviour
         //_playButton.onClick.AddListener(StartRun);
 
         GameManager.HealthChange += OnHealthChange;
-        GameManager.TimeEarn += OnTimeEarn;
-        GameManager.TimeUse += OnTimeUse;
+        //GameManager.TimeEarn += OnTimeEarn;
+        //GameManager.TimeUse += OnTimeUse;
     }
 
     private void OnDisable()
@@ -44,8 +44,8 @@ public class UI_Manager : MonoBehaviour
         //_playButton.onClick.RemoveAllListeners();
 
         GameManager.HealthChange -= OnHealthChange;
-        GameManager.TimeEarn -= OnTimeEarn;
-        GameManager.TimeUse -= OnTimeUse;
+        //GameManager.TimeEarn -= OnTimeEarn;
+        //GameManager.TimeUse -= OnTimeUse;
     }
 
     private void StartRun()
@@ -62,26 +62,19 @@ public class UI_Manager : MonoBehaviour
         _healthBar.ChangeValue(current, max);
     }
 
-    private void OnTimeEarn(float time)
-    {
-        var newPopUp = Instantiate(_timePopUpPrefab, _timePopUpSpawn);
-        newPopUp.Init(time, true);
-    }
+    //private void OnTimeEarn(float time)
+    //{
+    //    var newPopUp = Instantiate(_timePopUpPrefab, _timePopUpRect);
+    //    newPopUp.Init(time, true);
+    //}
 
-    private void OnTimeUse(float time)
-    {
-        var newPopUp = Instantiate(_timePopUpPrefab, _timePopUpSpawn);
-        newPopUp.Init(time, false);
-    }
+    //private void OnTimeUse(float time)
+    //{
+    //    var newPopUp = Instantiate(_timePopUpPrefab, _timePopUpRect);
+    //    newPopUp.Init(time, false);
+    //}
 
-    public void UpdateTimer(float time)
-    {
-        TimeSpan timeSpan = TimeSpan.FromSeconds(time);
-        if (time > 0)
-            _timer.text = $"{timeSpan.Minutes}:{timeSpan.Seconds:D2}";
-        else
-            _timer.text = $"-{-timeSpan.Minutes}:{-timeSpan.Seconds:D2}";
-    }
+
 
     public void SetActiveGameInterface(bool isEnabled)
     {

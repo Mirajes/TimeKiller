@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UI_HealthBar : MonoBehaviour
 {
-    [SerializeField] private Image _healthImage;
+    [SerializeField] private Image _healthFill;
     [SerializeField] private TMP_Text _healthText;
 
     [SerializeField] private Outline _outline;
@@ -13,7 +13,7 @@ public class UI_HealthBar : MonoBehaviour
     {
         float value = current / max;
         
-        _healthImage.fillAmount = value;
+        _healthFill.fillAmount = value;
         _healthText.text = current.ToString("F2");
     }
 }

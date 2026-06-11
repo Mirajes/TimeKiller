@@ -7,7 +7,8 @@ using UnityEngine.UI;
 // maybe setting anchor position by object will be better
 public class UI_Settings : MonoBehaviour
 {
-    [SerializeField] private RectTransform _settingsRect;
+    [SerializeField] private RectTransform _rectTransform;
+    [SerializeField] private UI_TVController _tvOpener;
 
     [Header("DOTween")]
     [SerializeField] private float _onOffTime = 1f;
@@ -47,44 +48,49 @@ public class UI_Settings : MonoBehaviour
         DeInitVolumeSliders();
         _exitButton.onClick.RemoveAllListeners();
 
-        DOTween.Kill(_settingsRect);
+        DOTween.Kill(_rectTransform);
     }
 
     public void Init()
     {
-        _anchorPosition = _settingsRect.anchoredPosition;
+        _anchorPosition = _rectTransform.anchoredPosition;
     }
 
     public void Open()
     {
-        DOTween.Kill(_settingsRect);
+        DOTween.Kill(_rectTransform);
 
-        _settingsRect.gameObject.SetActive(false);
+        _rectTransform.gameObject.SetActive(false);
+
+        float rectHeight = _rectTransform.rect.height;
 
         Vector2 startPosition = new Vector2(
             _anchorPosition.x,
-            _anchorPosition.y - Screen.height * 2
+            -rectHeight
             );
 
-        _settingsRect.anchoredPosition = startPosition;
+        _rectTransform.anchoredPosition = startPosition;
 
-        _settingsRect.gameObject.SetActive(true);
+        _rectTransform.gameObject.SetActive(true);
 
-        _settingsRect.DOAnchorPos(_anchorPosition, _onOffTime);
+        _rectTransform.DOAnchorPos(_anchorPosition, _onOffTime);
     }
 
     public void Close()
     {
-        DOTween.Kill(_settingsRect);
+        DOTween.Kill(_rectTransform);
+
+        float rectHeight = _rectTransform.rect.height;
 
         Vector2 endPosition = new Vector2(
             _anchorPosition.x,
-            _anchorPosition.y - Screen.height * 2
+            -rectHeight
             );
 
-        _settingsRect.DOAnchorPos(endPosition, _onOffTime).OnComplete(() =>
+        _rectTransform.DOAnchorPos(endPosition, _onOffTime).OnComplete(() =>
         {
-            _settingsRect.gameObject.SetActive(false);
+            _rectTransform.gameObject.SetActive(false);
+            _tvOpener.Open();
         });
     }
 

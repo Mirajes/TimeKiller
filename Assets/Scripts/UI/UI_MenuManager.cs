@@ -2,8 +2,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// there spaggeti-code by linking buttons listeners
 public class UI_MenuManager : MonoBehaviour
 {
+    [SerializeField] private UI_TVController _tvController;
+
     [Header("CharacterEditMenu")]
     [SerializeField] private Button _toCharacterList;
     [SerializeField] private Button _fromCharacterList;
@@ -20,10 +23,12 @@ public class UI_MenuManager : MonoBehaviour
     private void Awake()
     {
         _settings.Init();
+        _tvController.Init();
 
         _toCharacterList.onClick.AddListener(() => SceneLoader("Game"));
         _exitButton.onClick.AddListener(() => SceneLoader("Menu"));
 
+        _toSettings.onClick.AddListener(_tvController.Close);
         _toSettings.onClick.AddListener(_settings.Open);
     }
 

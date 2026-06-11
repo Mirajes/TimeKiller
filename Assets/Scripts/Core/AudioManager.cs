@@ -35,8 +35,10 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
+            return;
         }
+
     }
 
     private void LoadVolumeSettings()
