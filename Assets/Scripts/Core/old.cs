@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     public static Action EndRun;
     public static Action StageNext;
     public static Action<float, float> HealthChange; // current, max
-    public static Action<float> TimeUse;
+    public static Action<float> TimeSpent;
     public static Action<float> TimeEarn;
 
     #region Debug
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         StartRun += OnStartRun;
         TimeEarn += OnTimeEarn;
-        TimeUse += OnTimeUse;
+        TimeSpent += OnTimeUse;
 
         StageNext += OnStageNext;
 
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
     {
         StartRun -= OnStartRun;
         TimeEarn -= OnTimeEarn;
-        TimeUse -= OnTimeUse;
+        TimeSpent -= OnTimeUse;
 
         StageNext -= OnStageNext;
 

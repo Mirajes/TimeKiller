@@ -53,6 +53,11 @@ public abstract class A_Enemy : MonoBehaviour, IDamageable
         }
     }
 
+    public void HandleHeal(float amount)
+    {
+        throw new NotImplementedException();
+    }
+
     protected virtual void Death()
     {
         _aliveCTS?.Cancel();
@@ -87,6 +92,8 @@ public abstract class A_Enemy : MonoBehaviour, IDamageable
     {
 
     }
+
+
 }
 
 //public class HitBox : MonoBehaviour

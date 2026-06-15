@@ -5,10 +5,12 @@ using UnityEngine;
 
 public abstract class A_Stage : MonoBehaviour
 {
+    public Transform SpawnPoint => _SpawnPoint;
+
     [SerializeField] protected Transform _SpawnPoint;
     [SerializeField] protected List<Spawner> _EnemySpawners;
     [SerializeField] protected List<Transform> _PortalPoints;
-
+    
     [SerializeField] private List<A_Enemy> _enemies = new();
     [SerializeField] protected Portal _Portal;
 

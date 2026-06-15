@@ -7,7 +7,7 @@ public abstract class A_Weapon : MonoBehaviour
 
     public virtual void Shoot()
     {
-        GameManager.TimeUse?.Invoke(_Data.TimeCostPerBullet);
+        GameManager.TimeSpent?.Invoke(_Data.TimeCostPerBullet);
 
         //Vector3 rayOrigin = _ShootPoint.position;
         //Vector3 rayDirection = _ShootPoint.forward;

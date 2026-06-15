@@ -36,7 +36,7 @@ public class UI_Manager : MonoBehaviour
 
         GameManager.HealthChange += OnHealthChange;
         //GameManager.TimeEarn += OnTimeEarn;
-        //GameManager.TimeUse += OnTimeUse;
+        //GameManager.TimeSpent += OnTimeUse;
     }
 
     private void OnDisable()
@@ -45,7 +45,7 @@ public class UI_Manager : MonoBehaviour
 
         GameManager.HealthChange -= OnHealthChange;
         //GameManager.TimeEarn -= OnTimeEarn;
-        //GameManager.TimeUse -= OnTimeUse;
+        //GameManager.TimeSpent -= OnTimeUse;
     }
 
     private void StartRun()

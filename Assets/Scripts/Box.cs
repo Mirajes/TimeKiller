@@ -27,4 +27,9 @@ public class Box : MonoBehaviour, IDamageable
     {
         Destroy(this.gameObject);
     }
+
+    public void HandleHeal(float amount)
+    {
+        throw new System.NotImplementedException();
+    }
 }
