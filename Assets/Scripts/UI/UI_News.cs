@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine;
 
 // ultrawide monitor breaking me
+// 
+// i can just make huge string to avoid news repeats
 public class UI_News : MonoBehaviour
 {
     StringBuilder _stringBuilder = new(256); // > 64 needed?
@@ -19,7 +21,7 @@ public class UI_News : MonoBehaviour
     [SerializeField] private List<string> _newsList = new();
 
 
-    private async UniTask WritterTask()
+    private async UniTask WriterTask()
     {
         _stringBuilder.Clear();
         _newsField.text = string.Empty;
@@ -70,6 +72,6 @@ public class UI_News : MonoBehaviour
 
     private void Start()
     {
-        WritterTask().Forget();
+        WriterTask().Forget();
     }
 }

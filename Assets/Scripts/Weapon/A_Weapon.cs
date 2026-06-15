@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class A_Weapon : MonoBehaviour
 {
     [SerializeField] protected SO_Weapon _Data;
-    [SerializeField] protected Transform _ShootPoint;
+    //[SerializeField] protected Transform _ShootPoint;
 
     public virtual void Shoot()
     {

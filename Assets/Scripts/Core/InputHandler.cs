@@ -8,6 +8,7 @@ public class InputHandler
         _inputs = new InputSystem_Actions();
     }
 
+    #region Player
     public void InitInputs(PlayerController playerController)
     {
         _inputs.Player.Move.performed += playerController.OnMoveInput;
@@ -21,7 +22,6 @@ public class InputHandler
 
         _inputs.Player.Attack.started += playerController.OnAttackInput;
     }
-
     public void RemoveInputs(PlayerController playerController)
     {
         _inputs.Player.Move.performed -= playerController.OnMoveInput;
@@ -35,4 +35,18 @@ public class InputHandler
 
         _inputs.Player.Attack.started -= playerController.OnAttackInput;
     }
+    #endregion
+
+    #region UI
+    public void InitInputs(UIManager uiManager)
+    {
+        _inputs.UI.SettingsWindow.started += uiManager.PauseWindow.OnPauseInput;
+        _inputs.UI.DebugWindow.started += uiManager.OnDebugInput;
+    }
+    public void RemoveInputs(UIManager uiManager)
+    {
+        _inputs.UI.SettingsWindow.started -= uiManager.PauseWindow.OnPauseInput;
+        _inputs.UI.DebugWindow.started -= uiManager.OnDebugInput;
+    }
+    #endregion
 }

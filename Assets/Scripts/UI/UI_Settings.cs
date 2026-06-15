@@ -17,6 +17,7 @@ public class UI_Settings : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _audioWindowButton;
+    [SerializeField] private Button _otherWindowButton;
 
     [Header("Audio")]
     [SerializeField] private RectTransform _audioWindow;
@@ -28,6 +29,9 @@ public class UI_Settings : MonoBehaviour
     [SerializeField] private TMP_Text _musicVolumeTMPT;
     [SerializeField] private TMP_Text _sfxVolumeTMPT;
     [SerializeField] private TMP_Text _voiceVolumeTMPT;
+
+    [Header("Other")]
+    [SerializeField] private bool _isCrashPopUpActive = false;
 
     // screenResolution, language, etc
 
@@ -54,6 +58,11 @@ public class UI_Settings : MonoBehaviour
     public void Init()
     {
         _anchorPosition = _rectTransform.anchoredPosition;
+    }
+
+    public void SetTVOpener(UI_TVController tvController)
+    {
+        _tvOpener = tvController;
     }
 
     public void Open()

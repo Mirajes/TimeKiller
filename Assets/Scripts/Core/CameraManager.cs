@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public Camera ViewCamera => _viewCamera;
-    
-    [SerializeField] private Camera _viewCamera;
+    public Camera ExternalCamera => _externalCamera;
+
+    [SerializeField] private Camera _externalCamera;
 }

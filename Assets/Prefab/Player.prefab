@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1939928146437433762}
   - component: {fileID: 8688828828677516407}
   - component: {fileID: 4466225252465652816}
+  - component: {fileID: 1783209956969554524}
   - component: {fileID: 7137451904030721586}
   - component: {fileID: 4139229425054410481}
   m_Layer: 6
@@ -113,6 +114,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1783209956969554524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671186500846361578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36b4d803319716c44a709d836359895d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerController: {fileID: 7137451904030721586}
 --- !u!114 &7137451904030721586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +191,7 @@ GameObject:
   - component: {fileID: 6855936460230283022}
   - component: {fileID: 4354638095409097329}
   m_Layer: 0
-  m_Name: MainCamera_d1
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -426,4 +440,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Data: {fileID: 11400000, guid: 4ea4c58319e442a47b32e110ef311ae7, type: 2}
-  _ShootPoint: {fileID: 7886079533941354533}

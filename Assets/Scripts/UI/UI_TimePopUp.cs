@@ -1,11 +1,13 @@
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
 public class UI_TimePopUp : MonoBehaviour
 {
-    [SerializeField] private float _timeToDissappear = 0.3f;
+    [SerializeField] private float _timeToDisappear = 0.3f;
     [SerializeField] private TMP_Text _timeField;
+    [SerializeField] private RectTransform _rect;
 
     public void Init(float timeToText, bool isGiven)
     {
@@ -23,12 +25,13 @@ public class UI_TimePopUp : MonoBehaviour
 
         text += timeToText.ToString("F2");
         _timeField.text = text;
-        CountToDissappearTask().Forget();
+        CountToDisappearTask().Forget();
     }
 
-    private async UniTask CountToDissappearTask()
+    private async UniTask CountToDisappearTask()
     {
-        await UniTask.Delay(System.TimeSpan.FromSeconds(_timeToDissappear));
+        _rect.DOAnchorPosY(10f, _timeToDisappear);
+        await UniTask.Delay(System.TimeSpan.FromSeconds(_timeToDisappear));
         Destroy(this.gameObject);
     }
 }

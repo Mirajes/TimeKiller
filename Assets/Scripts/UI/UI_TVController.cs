@@ -16,6 +16,7 @@ public class UI_TVController : MonoBehaviour
     public void Init()
     {
         _anchorPosition = _rectTransform.anchoredPosition;
+        Open();
     }
 
     public void Open()

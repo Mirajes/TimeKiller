@@ -59,25 +59,3 @@ public abstract class A_Stage : MonoBehaviour
         Instantiate<Portal>(_Portal, _PortalPoints[randomIndex]);
     }
 }
-
-
-public class Portal : MonoBehaviour
-{
-    [SerializeField] private LayerMask _layerToTP;
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == _layerToTP)
-        {
-            // Invoke next Stage to start
-        }
-    }
-}
-
-public class Stage_Starter : A_Stage { }
-
-public class Stage_LVL1 : A_Stage { }
-
-public class Stage_LVL2 : A_Stage { }
-
-public class Stage_BossLVL1 : A_Stage { }

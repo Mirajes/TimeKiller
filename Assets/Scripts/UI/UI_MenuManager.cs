@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -53,3 +54,16 @@ public class UI_MenuManager : MonoBehaviour
     }
 
 }
+
+public class UI_HomeShopping : MonoBehaviour
+{
+    [SerializeField] private List<UI_HomeShopOffer> _offers = new();
+
+
+}
+
+public class UI_HomeShopOffer : MonoBehaviour
+{
+    [SerializeField] private GameObject _shopOffer;
+}
+

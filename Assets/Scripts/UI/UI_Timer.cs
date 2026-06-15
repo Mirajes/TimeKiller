@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -7,10 +6,22 @@ public class UI_Timer : MonoBehaviour
 {
     [SerializeField] private TMP_Text _timerField;
 
-    List<UI_TimePopUp> _timePopUps; // buffer => ??
+    //List<UI_TimePopUp> _timePopUps; // buffer => ??
 
-    [SerializeField] private UI_TimePopUp _popUpPrefab;
     [SerializeField] private RectTransform _popUpRect;
+    [SerializeField] private UI_TimePopUp _popUpPrefab;
+
+    private void OnEnable()
+    {
+        GameManager.TimeEarn += OnTimeEarn;
+        GameManager.TimeSpent += OnTimeSpent;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.TimeEarn -= OnTimeEarn;
+        GameManager.TimeSpent -= OnTimeSpent;
+    }
 
     public void UpdateTimer(float time)
     {
@@ -21,13 +32,15 @@ public class UI_Timer : MonoBehaviour
             _timerField.text = $"-{-timeSpan.Minutes}:{-timeSpan.Seconds:D2}";
     }
 
-    public void TimeEarn(float timeAmount)
+    private void OnTimeEarn(float timeAmount)
     {
-        _popUpPrefab.Init(timeAmount, true);
+        var newPopUp = Instantiate(_popUpPrefab, _popUpRect);
+        newPopUp.Init(timeAmount, true);
     }
 
-    public void TimeSpent(float timeAmount)
+    private void OnTimeSpent(float timeAmount)
     {
-        _popUpPrefab.Init(timeAmount, false);
+        var newPopUp = Instantiate(_popUpPrefab, _popUpRect);
+        newPopUp.Init(timeAmount, false);
     }
 }

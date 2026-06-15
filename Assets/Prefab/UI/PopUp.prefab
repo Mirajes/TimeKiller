@@ -89,8 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e096c928db39f9429152a589b003f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeToDissappear: 0.3
+  _timeToDisappear: 0.3
   _timeField: {fileID: 2652279915913233217}
+  _rect: {fileID: 7991331937712062288}
 --- !u!1 &7206753846283354911
 GameObject:
   m_ObjectHideFlags: 0

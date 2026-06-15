@@ -655,6 +655,24 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SettingsWindow"",
+                    ""type"": ""Button"",
+                    ""id"": ""66a2e46b-bd23-4ece-bd19-433f67612008"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugWindow"",
+                    ""type"": ""Button"",
+                    ""id"": ""12e95271-d16c-4818-85bd-2b86c12c13b8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1075,6 +1093,28 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""TrackedDeviceOrientation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""406abeb3-9932-4ac8-8f8e-b413b01122a4"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SettingsWindow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a56340d9-423b-4923-805c-c215ba5f05e5"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DebugWindow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1165,6 +1205,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        m_UI_SettingsWindow = m_UI.FindAction("SettingsWindow", throwIfNotFound: true);
+        m_UI_DebugWindow = m_UI.FindAction("DebugWindow", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1440,6 +1482,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_ScrollWheel;
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
+    private readonly InputAction m_UI_SettingsWindow;
+    private readonly InputAction m_UI_DebugWindow;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -1491,6 +1535,14 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/TrackedDeviceOrientation".
         /// </summary>
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/SettingsWindow".
+        /// </summary>
+        public InputAction @SettingsWindow => m_Wrapper.m_UI_SettingsWindow;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/DebugWindow".
+        /// </summary>
+        public InputAction @DebugWindow => m_Wrapper.m_UI_DebugWindow;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1547,6 +1599,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @TrackedDeviceOrientation.started += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled += instance.OnTrackedDeviceOrientation;
+            @SettingsWindow.started += instance.OnSettingsWindow;
+            @SettingsWindow.performed += instance.OnSettingsWindow;
+            @SettingsWindow.canceled += instance.OnSettingsWindow;
+            @DebugWindow.started += instance.OnDebugWindow;
+            @DebugWindow.performed += instance.OnDebugWindow;
+            @DebugWindow.canceled += instance.OnDebugWindow;
         }
 
         /// <summary>
@@ -1588,6 +1646,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @TrackedDeviceOrientation.started -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled -= instance.OnTrackedDeviceOrientation;
+            @SettingsWindow.started -= instance.OnSettingsWindow;
+            @SettingsWindow.performed -= instance.OnSettingsWindow;
+            @SettingsWindow.canceled -= instance.OnSettingsWindow;
+            @DebugWindow.started -= instance.OnDebugWindow;
+            @DebugWindow.performed -= instance.OnDebugWindow;
+            @DebugWindow.canceled -= instance.OnDebugWindow;
         }
 
         /// <summary>
@@ -1834,5 +1898,19 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SettingsWindow" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSettingsWindow(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DebugWindow" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDebugWindow(InputAction.CallbackContext context);
     }
 }

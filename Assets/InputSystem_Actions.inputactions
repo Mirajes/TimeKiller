@@ -569,6 +569,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SettingsWindow",
+                    "type": "Button",
+                    "id": "66a2e46b-bd23-4ece-bd19-433f67612008",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugWindow",
+                    "type": "Button",
+                    "id": "12e95271-d16c-4818-85bd-2b86c12c13b8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -987,6 +1005,28 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "406abeb3-9932-4ac8-8f8e-b413b01122a4",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SettingsWindow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a56340d9-423b-4923-805c-c215ba5f05e5",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugWindow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
