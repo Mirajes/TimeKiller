@@ -42,11 +42,13 @@ public class InputHandler
     {
         _inputs.UI.SettingsWindow.started += uiManager.PauseWindow.OnPauseInput;
         _inputs.UI.DebugWindow.started += uiManager.OnDebugInput;
+        _inputs.UI.OpenInventory.started += uiManager.OnInventoryInput;
     }
     public void RemoveInputs(UIManager uiManager)
     {
         _inputs.UI.SettingsWindow.started -= uiManager.PauseWindow.OnPauseInput;
         _inputs.UI.DebugWindow.started -= uiManager.OnDebugInput;
+        _inputs.UI.OpenInventory.started -= uiManager.OnInventoryInput;
     }
     #endregion
 }

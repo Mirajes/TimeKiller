@@ -20,10 +20,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UI_HealthBar _healthBar;
     [SerializeField] private UI_Timer _timer;
 
+    [Header("Inventory")]
+    [SerializeField] private RectTransform _inventoryScreen;
+
     [Header("Notification")] // maybe different place for Sprites will be better?
     [SerializeField] private UI_NotificationPopUp _notificationPrefab;
     [SerializeField] private RectTransform _notificationContainer;
     //[SerializeField] private List<UI_NotificationPopUp> _notificationPopUpList // obj => lazy
+
+    [Header("Promotion")]
+    [SerializeField] private UI_PromotionWindow _promotionWindow;
 
     public static Action<string, NotificationType> Notify;
 
@@ -81,6 +87,15 @@ public class UIManager : MonoBehaviour
     {
         bool isActive = !_debugWindow.gameObject.activeSelf;
         _debugWindow.gameObject.SetActive(isActive); // why not working by first time if obj is disabled before scene?
+    }
+
+    public void OnInventoryInput(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        bool isActive = !_inventoryScreen.gameObject.activeSelf;
+        _inventoryScreen.gameObject.SetActive(isActive);
+
+        if (isActive)
+            Cursor.lockState = CursorLockMode.None;
     }
 
     private void OnNotify(string message, NotificationType type)
