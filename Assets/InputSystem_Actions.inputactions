@@ -596,6 +596,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "OpenPromote",
+                    "type": "Button",
+                    "id": "edc96cc3-550f-462a-8ef0-2156d55d7279",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1047,6 +1056,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "OpenInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "917f35ef-8807-4300-817a-807a13b87f91",
+                    "path": "<Keyboard>/f2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenPromote",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

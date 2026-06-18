@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76275b81f465a94428069d2b2982fef3, type: 3}
-  m_Name: Marbles
+  m_Name: Pistol
   m_EditorClassIdentifier: 
-  _name: Marbles
-  _smallIcon: {fileID: 21300000, guid: d082e353688380e4eb64652d1259068e, type: 3}
+  _name: Pistol
+  _smallIcon: {fileID: 21300000, guid: 88c1b355ff53d3f4f8c1c206f2d2e3f2, type: 3}
   _bigIcon: {fileID: 0}
   _description: 
-  _type: 1
+  _type: 2

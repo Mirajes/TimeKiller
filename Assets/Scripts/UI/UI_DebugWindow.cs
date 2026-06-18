@@ -4,12 +4,14 @@ using UnityEngine.UI;
 
 public class UI_DebugWindow : MonoBehaviour, IDragHandler
 {
-    [SerializeField] private Button _close;
-
     [SerializeField] private RectTransform _rectTransform;
     [SerializeField] private Button _damagePlayerButton;
     [SerializeField] private Button _healPlayerButton;
     [SerializeField] private Button _notifyButton;
+    [SerializeField] private Button _initPromotionsButton;
+    [SerializeField] private Button _addAdPointButton;
+
+    [SerializeField] private UIManager _uiManager;
 
     private Player _player;
     private Vector2 _defaultPosition;
@@ -37,6 +39,8 @@ public class UI_DebugWindow : MonoBehaviour, IDragHandler
         _damagePlayerButton.onClick.AddListener(DamagePlayer);
         _healPlayerButton.onClick.AddListener(HealPlayer);
         _notifyButton.onClick.AddListener(Notify);
+        _initPromotionsButton.onClick.AddListener(InitPromotion);
+        _addAdPointButton.onClick.AddListener(AddPoint);
     }
 
     private void OnDisable()
@@ -46,6 +50,8 @@ public class UI_DebugWindow : MonoBehaviour, IDragHandler
         _damagePlayerButton.onClick.RemoveAllListeners();
         _healPlayerButton.onClick.RemoveAllListeners();
         _notifyButton.onClick.RemoveAllListeners();
+        _initPromotionsButton.onClick.RemoveAllListeners();
+        _addAdPointButton.onClick.RemoveAllListeners();
     }
 
     private void DamagePlayer()
@@ -61,5 +67,15 @@ public class UI_DebugWindow : MonoBehaviour, IDragHandler
     private void Notify()
     {
         UIManager.Notify?.Invoke("hey, that's a debug window with letter than have more than 40 letters", NotificationType.Alert);
+    }
+
+    private void InitPromotion()
+    {
+        _uiManager.PromotionWindow.Init();
+    }
+
+    private void AddPoint()
+    {
+        GameManager.GetAdPoint?.Invoke(1);
     }
 }

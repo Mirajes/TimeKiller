@@ -7,14 +7,17 @@ public class UI_InventorySlot : MonoBehaviour
 
     [SerializeField] private SO_Item _item;
     [SerializeField] private RectTransform _rect;
-    [SerializeField] private ItemType _type;
 
     [SerializeField] private CanvasGroup _canvasGroup;
 
     public SO_Item Item => _item;
     public RectTransform Rect => _rect;
-    public ItemType Type => _type;
 
+    public void Init(SO_Item item)
+    {
+        _item = item;
+        UpdateSlot();
+    }
     public void UpdateSlot()
     {
         if (_item == null) return;

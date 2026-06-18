@@ -16,4 +16,4 @@ MonoBehaviour:
   _smallIcon: {fileID: 21300000, guid: 005f8e4e808113349a4bcccf2d5178c2, type: 3}
   _bigIcon: {fileID: 0}
   _description: 
-  _type: 0
+  _type: 1

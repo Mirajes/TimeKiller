@@ -9,6 +9,7 @@ public class UI_PromotionOffer : MonoBehaviour
     [SerializeField] private Image _iconBig;
     [SerializeField] private TMP_Text _nameField;
     [SerializeField] private TMP_Text _costField;
+    [SerializeField] private Button _buyButton;
 
     [SerializeField] private TMP_Text _descriptionField;
     [SerializeField] private int _countToBuy;
@@ -24,6 +25,16 @@ public class UI_PromotionOffer : MonoBehaviour
     public void UpdateWindow() 
     {
 
+    }
+
+    private void Start()
+    {
+        _buyButton.onClick.AddListener(HandleBuy);
+    }
+
+    private void OnDestroy()
+    {
+        _buyButton.onClick.RemoveAllListeners();
     }
 
     private void HandleBuy()

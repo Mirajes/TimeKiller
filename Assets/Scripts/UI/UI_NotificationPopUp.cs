@@ -22,6 +22,7 @@ public class UI_NotificationPopUp : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Sprite _notifySprite;
     [SerializeField] private Sprite _announcementSprite;
     [SerializeField] private Sprite _alertSprite;
+    [SerializeField] private Sprite _warnSprite;
     [SerializeField] private Sprite _buySprite;
 
     CancellationTokenSource _cts;
@@ -29,9 +30,13 @@ public class UI_NotificationPopUp : MonoBehaviour, IPointerClickHandler
     public void Init(string text, NotificationType type)
     {
         _icon.sprite = GetNotificationSprite(type);
-        _notification.text = text.Substring(0, _charLimit) + "...";
 
-        _cts = new();
+        if (text.Length >= _charLimit)
+            _notification.text = text.Substring(0, _charLimit) + "...";
+        else 
+            _notification.text = text;
+
+            _cts = new();
         this.transform.localScale = Vector3.zero;
         _timeProgress = 0f;
         _progressBar.fillAmount = 0f;
@@ -89,6 +94,8 @@ public class UI_NotificationPopUp : MonoBehaviour, IPointerClickHandler
                 return _announcementSprite;
             case NotificationType.Alert:
                 return _alertSprite;
+            case NotificationType.Warn:
+                return _warnSprite;
             case NotificationType.Buy:
                 return _buySprite;
             default:

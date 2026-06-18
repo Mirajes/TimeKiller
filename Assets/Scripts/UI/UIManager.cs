@@ -1,12 +1,14 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 // meshanina
 public class UIManager : MonoBehaviour
 {
     public UI_PauseScreen PauseWindow => _pauseWindow;
+    public UI_PromotionWindow PromotionWindow => _promotionWindow;
 
     [Header("Debug")]
     [SerializeField] private UI_DebugWindow _debugWindow;
@@ -32,6 +34,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UI_PromotionWindow _promotionWindow;
 
     public static Action<string, NotificationType> Notify;
+    public static Action<int> AdPointChange;
 
     private void OnEnable()
     {
@@ -83,19 +86,35 @@ public class UIManager : MonoBehaviour
         _crosshair.gameObject.SetActive(isEnabled);
     }
 
-    public void OnDebugInput(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    public void OnDebugInput(InputAction.CallbackContext context)
     {
         bool isActive = !_debugWindow.gameObject.activeSelf;
         _debugWindow.gameObject.SetActive(isActive); // why not working by first time if obj is disabled before scene?
     }
 
-    public void OnInventoryInput(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    public void OnInventoryInput(InputAction.CallbackContext context)
     {
         bool isActive = !_inventoryScreen.gameObject.activeSelf;
         _inventoryScreen.gameObject.SetActive(isActive);
 
         if (isActive)
             Cursor.lockState = CursorLockMode.None;
+        else
+            Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void OnPromoteInput(InputAction.CallbackContext context)
+    {
+        bool isActive = _promotionWindow.gameObject.activeSelf;
+        if (!isActive)
+            _promotionWindow.Open();
+        else
+            _promotionWindow.Close();
+
+        if (isActive)
+            Cursor.lockState = CursorLockMode.None;
+        else
+            Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnNotify(string message, NotificationType type)

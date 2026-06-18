@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -5,6 +6,11 @@ using UnityEngine.UI;
 
 public class UI_PromotionWindow : MonoBehaviour
 {
+    [SerializeField] private RectTransform _rect;
+    [SerializeField] private Vector2 _anchorPos;
+    [SerializeField] private float _tweenTime = 1f;
+    [SerializeField] private Button _closeButton;
+
     [SerializeField] private TMP_Text _adPointsField;
 
     [SerializeField] private VerticalLayoutGroup _verticalLayout;
@@ -16,7 +22,15 @@ public class UI_PromotionWindow : MonoBehaviour
 
     private void Start()
     {
-        RecalculateOfferContainer(_offerCount);
+        Init();
+        UIManager.AdPointChange += OnAdPointChange;
+        _closeButton.onClick.AddListener(Close);
+    }
+
+    private void OnDestroy()
+    {
+        UIManager.AdPointChange -= OnAdPointChange;
+        _closeButton.onClick.RemoveAllListeners();
     }
 
     public void Init()
@@ -24,13 +38,48 @@ public class UI_PromotionWindow : MonoBehaviour
         if (_offerCount == 0)
         {
             var noOffer = Instantiate(_offerListPrefabs[0], _offerContainer);
+            RecalculateOfferContainer(1);
             return;
         }
 
-        for (int i  = 0; i < _offerCount; i++)
+        for (int i  = 1; i < _offerCount; i++)
         {
 
         }
+
+        for (int i = 0;  i < _offerContainer.childCount; i++)
+        {
+            Destroy(_offerContainer.GetChild(i).gameObject);
+        }
+
+        RecalculateOfferContainer(_offerCount);
+    }
+
+    public void Open()
+    {
+        DOTween.Kill(this.transform);
+
+        this.gameObject.SetActive(false);
+
+        Vector2 startPos = _anchorPos + new Vector2(0, Screen.height * 2);
+        _rect.transform.position = startPos;
+
+        this.gameObject.SetActive(true);
+
+        _rect.DOAnchorPos(_anchorPos, _tweenTime);
+    }
+
+    public void Close()
+    {
+        DOTween.Kill(this.transform);
+
+        Vector2 endPos = _anchorPos - new Vector2(0, Screen.height * 2);
+
+        _rect.DOAnchorPos(endPos, _tweenTime).OnComplete(() =>
+        {
+            this.gameObject.SetActive(false);
+        });
+
     }
 
     private void RecalculateOfferContainer(int offerCount)
@@ -41,4 +90,10 @@ public class UI_PromotionWindow : MonoBehaviour
 
         _offerContainer.sizeDelta = new Vector2(0, offset + rawSize + expand);
     }
+
+    private void OnAdPointChange(int amount)
+    {
+        _adPointsField.text = "ad points: " + amount.ToString();
+    }
+    
 }

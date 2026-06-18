@@ -682,6 +682,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenPromote"",
+                    ""type"": ""Button"",
+                    ""id"": ""edc96cc3-550f-462a-8ef0-2156d55d7279"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1135,6 +1144,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""OpenInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""917f35ef-8807-4300-817a-807a13b87f91"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenPromote"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1228,6 +1248,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_UI_SettingsWindow = m_UI.FindAction("SettingsWindow", throwIfNotFound: true);
         m_UI_DebugWindow = m_UI.FindAction("DebugWindow", throwIfNotFound: true);
         m_UI_OpenInventory = m_UI.FindAction("OpenInventory", throwIfNotFound: true);
+        m_UI_OpenPromote = m_UI.FindAction("OpenPromote", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1506,6 +1527,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_SettingsWindow;
     private readonly InputAction m_UI_DebugWindow;
     private readonly InputAction m_UI_OpenInventory;
+    private readonly InputAction m_UI_OpenPromote;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -1569,6 +1591,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/OpenInventory".
         /// </summary>
         public InputAction @OpenInventory => m_Wrapper.m_UI_OpenInventory;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/OpenPromote".
+        /// </summary>
+        public InputAction @OpenPromote => m_Wrapper.m_UI_OpenPromote;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1634,6 +1660,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @OpenInventory.started += instance.OnOpenInventory;
             @OpenInventory.performed += instance.OnOpenInventory;
             @OpenInventory.canceled += instance.OnOpenInventory;
+            @OpenPromote.started += instance.OnOpenPromote;
+            @OpenPromote.performed += instance.OnOpenPromote;
+            @OpenPromote.canceled += instance.OnOpenPromote;
         }
 
         /// <summary>
@@ -1684,6 +1713,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @OpenInventory.started -= instance.OnOpenInventory;
             @OpenInventory.performed -= instance.OnOpenInventory;
             @OpenInventory.canceled -= instance.OnOpenInventory;
+            @OpenPromote.started -= instance.OnOpenPromote;
+            @OpenPromote.performed -= instance.OnOpenPromote;
+            @OpenPromote.canceled -= instance.OnOpenPromote;
         }
 
         /// <summary>
@@ -1951,5 +1983,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnOpenInventory(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "OpenPromote" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenPromote(InputAction.CallbackContext context);
     }
 }

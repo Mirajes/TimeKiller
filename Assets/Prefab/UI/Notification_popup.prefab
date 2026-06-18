@@ -120,6 +120,7 @@ MonoBehaviour:
   _notifySprite: {fileID: 0}
   _announcementSprite: {fileID: 0}
   _alertSprite: {fileID: 21300000, guid: 005f8e4e808113349a4bcccf2d5178c2, type: 3}
+  _warnSprite: {fileID: 21300000, guid: 74793de872b59d84eb134aeedae3d643, type: 3}
   _buySprite: {fileID: 0}
 --- !u!1 &1486388053278317728
 GameObject:
@@ -363,7 +364,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.7
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

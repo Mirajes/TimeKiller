@@ -30,6 +30,10 @@ public class GameManager : MonoBehaviour
 
     public static Action<bool> Pause;
 
+    public static Action<int> GetAdPoint;
+    public static Action<int> RemoveAdPoint;
+    public static Action<SO_Item> BuyItem;
+
     private void Awake()
     {
         _inputHandler.Init();
@@ -39,6 +43,9 @@ public class GameManager : MonoBehaviour
         Player.PlayerDied += OnPlayerDied;
         Pause += OnPaused;
 
+        GetAdPoint += OnGetAdPoint;
+        RemoveAdPoint += OnRemoveAdPoint;
+
         if (_START_RUN)
             OnStartRun();
     }
@@ -47,6 +54,9 @@ public class GameManager : MonoBehaviour
     {
         Player.PlayerDied -= OnPlayerDied;
         Pause -= OnPaused;
+
+        GetAdPoint -= OnGetAdPoint;
+        RemoveAdPoint -= OnRemoveAdPoint;
 
         _inputHandler.Inputs?.Disable();
         _inputHandler.Inputs?.Dispose();
@@ -89,6 +99,18 @@ public class GameManager : MonoBehaviour
             _inputHandler.Inputs.Player.Enable();
             Cursor.lockState = CursorLockMode.Locked;
         }
+    }
+
+    private void OnGetAdPoint(int amount)
+    {
+        _adPoints += amount;
+        UIManager.AdPointChange?.Invoke(_adPoints);
+    }
+
+    private void OnRemoveAdPoint(int amount)
+    {
+        _adPoints -= amount;
+        UIManager.AdPointChange?.Invoke(_adPoints);
     }
 }
 
