@@ -1,3 +1,4 @@
+using AYellowpaper.SerializedCollections;
 using System;
 using UnityEngine;
 
@@ -8,6 +9,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioSource _sfxSource; // ?
     [SerializeField] private AudioSource _voiceSource; // ?
+
+    [SerializedDictionary("SFX Name", "Clip")] [SerializeField]
+    SerializedDictionary<string, AudioClip> _sfxList = new();
+    [SerializeField] private AudioClip _placeholder;
 
     private const string GENERAL_VOLUME_KEY = "GeneralVolume";
     private const string MUSIC_VOLUME_KEY = "MusicVolume";
@@ -102,5 +107,30 @@ public class AudioManager : MonoBehaviour
     public void PlayPositionedSound(AudioClip clip, Vector3 position, float volume = 1f)
     {
         // ??
+    }
+
+    private AudioClip GetSoundByName(string name)
+    {
+        if (_sfxList.TryGetValue(name, out AudioClip clip))
+        {
+            return clip;
+        }
+        else
+        {
+            return _placeholder;
+        }
+    }
+
+    public void PlaySFX(string soundName)
+    {
+        _sfxSource.pitch = UnityEngine.Random.Range(0.8f, 1.1f);
+        _sfxSource.PlayOneShot(GetSoundByName(soundName));
+    }
+
+    public void PlayMusic(string musicName)
+    {
+        _musicSource.Stop();
+        _musicSource.clip = GetSoundByName(musicName);
+        _musicSource.Play();
     }
 }

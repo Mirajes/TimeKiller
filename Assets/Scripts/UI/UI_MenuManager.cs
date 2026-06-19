@@ -26,11 +26,19 @@ public class UI_MenuManager : MonoBehaviour
         _settings.Init();
         _tvController.Init();
 
+        _toCharacterList.onClick.AddListener(() => PlaySound("click"));
         _toCharacterList.onClick.AddListener(() => SceneLoader("Game"));
-        _exitButton.onClick.AddListener(() => SceneLoader("Menu"));
-
+        _toSettings.onClick.AddListener(() => PlaySound("click"));
         _toSettings.onClick.AddListener(_tvController.Close);
         _toSettings.onClick.AddListener(_settings.Open);
+
+        _exitButton.onClick.AddListener(() => PlaySound("off"));
+        _exitButton.onClick.AddListener(() => SceneLoader("Menu"));
+    }
+
+    private void Start()
+    {
+        AudioManager.Instance.PlayMusic("menu"); // ui that invoking music -> :)
     }
 
     private void OnDestroy()
@@ -53,6 +61,10 @@ public class UI_MenuManager : MonoBehaviour
         Debug.Log("[UIMenu] -- loaded");
     }
 
+    private void PlaySound(string soundName)
+    {
+        AudioManager.Instance.PlaySFX(soundName);
+    }
 }
 
 public class UI_HomeShopping : MonoBehaviour

@@ -101,6 +101,8 @@ public class UIManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         else
             Cursor.lockState = CursorLockMode.Locked;
+
+        AudioManager.Instance.PlaySFX("click");
     }
 
     public void OnPromoteInput(InputAction.CallbackContext context)
@@ -110,6 +112,8 @@ public class UIManager : MonoBehaviour
             _promotionWindow.Open();
         else
             _promotionWindow.Close();
+
+        AudioManager.Instance.PlayMusic("click");
     }
 
     private void OnNotify(string message, NotificationType type)
@@ -117,12 +121,14 @@ public class UIManager : MonoBehaviour
         var newNotification = Instantiate(_notificationPrefab, _notificationContainer);
         newNotification.transform.SetSiblingIndex(0);
 
+        AudioManager.Instance.PlaySFX("alert");
         newNotification.Init(message, type);
     }
 
     public void BuyItem(SO_Item item)
     {
         _inventoryScreen.DropWindow.AddSlot(item);
+        AudioManager.Instance.PlaySFX("buy");
     }
 }
 

@@ -34,11 +34,13 @@ public class UI_PauseScreen : MonoBehaviour
         bool isActive = !this.gameObject.activeSelf;
         this.gameObject.SetActive(isActive);
 
+        AudioManager.Instance.PlaySFX("click");
         GameManager.Pause?.Invoke(isActive);
     }
 
     private void Resume()
     {
+        AudioManager.Instance.PlaySFX("click");
         this.gameObject.SetActive(false);
         GameManager.Pause?.Invoke(false);
     }
@@ -48,12 +50,16 @@ public class UI_PauseScreen : MonoBehaviour
         _settings.SetTVOpener(_tvController);
         _settings.Open();
         _tvController.Close();
+
+        AudioManager.Instance.PlaySFX("click");
     }
 
     private void ExitRun()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene("Menu");
+
+        AudioManager.Instance.PlaySFX("click");
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

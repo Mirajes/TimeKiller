@@ -51,6 +51,11 @@ public class GameManager : MonoBehaviour
             OnStartRun();
     }
 
+    private void Start()
+    {
+        AudioManager.Instance.PlayMusic("game");
+    }
+
     private void OnDestroy()
     {
         Player.PlayerDied -= OnPlayerDied;

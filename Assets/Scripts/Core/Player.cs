@@ -27,6 +27,7 @@ public class Player : MonoBehaviour, IDamageable
         if (_currentHealth > _maxHealth) 
             _currentHealth = _maxHealth;
 
+        AudioManager.Instance.PlaySFX("heal");
         GameManager.HealthChange?.Invoke(_currentHealth, _maxHealth); // ?
     }
 
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour, IDamageable
             Die();
         }
 
+        AudioManager.Instance.PlaySFX("hit");
         GameManager.HealthChange?.Invoke(_currentHealth, _maxHealth);
     }
 

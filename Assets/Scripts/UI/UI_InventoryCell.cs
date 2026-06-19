@@ -66,6 +66,8 @@ public class UI_InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     {
         if (_slot == null) return; // need to check in different way
 
+        AudioManager.Instance.PlaySFX("take");
+
         _slot.transform.SetParent(_parentCanvas.transform);
         _slot.HandleDrag(true);
 
@@ -82,6 +84,8 @@ public class UI_InventoryCell : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     public void OnEndDrag(PointerEventData eventData)
     {
         if (_slot == null) return;
+
+        AudioManager.Instance.PlaySFX("drop");
 
         if (eventData.pointerCurrentRaycast.gameObject.TryGetComponent(out UI_InventoryCell targetCell))
         {

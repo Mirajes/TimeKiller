@@ -50,6 +50,29 @@ MonoBehaviour:
   _musicSource: {fileID: 9115950624759017689}
   _sfxSource: {fileID: 3651259421610787992}
   _voiceSource: {fileID: 3125687990866265383}
+  _sfxList:
+    _serializedList:
+    - Key: click
+      Value: {fileID: 8300000, guid: 268e39befb71a0d4384e56020b97cd2b, type: 3}
+    - Key: hit
+      Value: {fileID: 8300000, guid: 0866f57d1fcb89347826bac28bd75834, type: 3}
+    - Key: heal
+      Value: {fileID: 8300000, guid: f8f1d4ec59af18046a6d4a840003b4f7, type: 3}
+    - Key: buy
+      Value: {fileID: 8300000, guid: befee1af589924048a6323c6b65815b9, type: 3}
+    - Key: drop
+      Value: {fileID: 8300000, guid: aee157adf6b791f46843b188a61ac6e8, type: 3}
+    - Key: take
+      Value: {fileID: 8300000, guid: 0991c220a15247842bd01879dca09aac, type: 3}
+    - Key: alert
+      Value: {fileID: 8300000, guid: 3b3c67b1bdc91fe41ab34892b48dcfaa, type: 3}
+    - Key: off
+      Value: {fileID: 8300000, guid: 6161f63974c12c04c844cadc7161ec9d, type: 3}
+    - Key: menu
+      Value: {fileID: 8300000, guid: 31ac813de0894b34d8335889fc87b7fa, type: 3}
+    - Key: game
+      Value: {fileID: 8300000, guid: 28aae859e333b8244b21e20bd8a1b302, type: 3}
+  _placeholder: {fileID: 8300000, guid: 268e39befb71a0d4384e56020b97cd2b, type: 3}
 --- !u!82 &9115950624759017689
 AudioSource:
   m_ObjectHideFlags: 0
@@ -65,7 +88,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

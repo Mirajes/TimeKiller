@@ -40,6 +40,7 @@ public class UI_Settings : MonoBehaviour
         InitVolumeSliders();
 
         _exitButton.onClick.AddListener(Close);
+        _exitButton.onClick.AddListener(() => PlaySFX("exit"));
     }
 
     private void Start()
@@ -161,6 +162,11 @@ public class UI_Settings : MonoBehaviour
     {
         AudioManager.Instance.OnVoiceVolumeChange(volume);
         _voiceVolumeTMPT.text = (_voiceVolumeSlider.value * 100).ToString("F0");
+    }
+    
+    private void PlaySFX(string soundName)
+    {
+        AudioManager.Instance.PlaySFX(soundName);
     }
     #endregion
 }
