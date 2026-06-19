@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UI_Timer _timer;
 
     [Header("Inventory")]
-    [SerializeField] private RectTransform _inventoryScreen;
+    [SerializeField] private UI_Inventory _inventoryScreen;
 
     [Header("Notification")] // maybe different place for Sprites will be better?
     [SerializeField] private UI_NotificationPopUp _notificationPrefab;
@@ -110,11 +110,6 @@ public class UIManager : MonoBehaviour
             _promotionWindow.Open();
         else
             _promotionWindow.Close();
-
-        if (isActive)
-            Cursor.lockState = CursorLockMode.None;
-        else
-            Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnNotify(string message, NotificationType type)
@@ -123,6 +118,11 @@ public class UIManager : MonoBehaviour
         newNotification.transform.SetSiblingIndex(0);
 
         newNotification.Init(message, type);
+    }
+
+    public void BuyItem(SO_Item item)
+    {
+        _inventoryScreen.DropWindow.AddSlot(item);
     }
 }
 

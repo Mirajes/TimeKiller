@@ -8,10 +8,12 @@ public class SO_Item : ScriptableObject
     [SerializeField] private Sprite _bigIcon;
     [SerializeField] private string _description;
     [SerializeField] private ItemType _type;
+    [SerializeField] private int _adCost;
 
     public string Name => _name;
     public Sprite SmallIcon => _smallIcon;
     public Sprite BigIcon => _bigIcon;
     public string Description => _description;
     public ItemType Type => _type;
+    public int AdCost => _adCost;
 }

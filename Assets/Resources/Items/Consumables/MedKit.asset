@@ -15,5 +15,6 @@ MonoBehaviour:
   _name: MedKit
   _smallIcon: {fileID: 21300000, guid: 005f8e4e808113349a4bcccf2d5178c2, type: 3}
   _bigIcon: {fileID: 0}
-  _description: 
+  _description: item to use
   _type: 1
+  _adCost: 1

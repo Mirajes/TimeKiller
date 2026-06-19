@@ -15,5 +15,6 @@ MonoBehaviour:
   _name: Pistol
   _smallIcon: {fileID: 21300000, guid: 88c1b355ff53d3f4f8c1c206f2d2e3f2, type: 3}
   _bigIcon: {fileID: 0}
-  _description: 
+  _description: metallic object to make bang bang
   _type: 2
+  _adCost: 2

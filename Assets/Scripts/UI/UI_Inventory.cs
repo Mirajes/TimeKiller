@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class UI_Inventory : MonoBehaviour
 {
+    public UI_DropWindow DropWindow => _groundContainer;
+
     [SerializeField] private Canvas _mainCanvas;
 
     [SerializeField] private UI_DropWindow _groundContainer;

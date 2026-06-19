@@ -25,6 +25,8 @@ public class UI_PromotionWindow : MonoBehaviour
         Init();
         UIManager.AdPointChange += OnAdPointChange;
         _closeButton.onClick.AddListener(Close);
+
+        this.gameObject.SetActive(false);
     }
 
     private void OnDestroy()
@@ -42,14 +44,16 @@ public class UI_PromotionWindow : MonoBehaviour
             return;
         }
 
-        for (int i  = 1; i < _offerCount; i++)
-        {
-
-        }
-
         for (int i = 0;  i < _offerContainer.childCount; i++)
         {
             Destroy(_offerContainer.GetChild(i).gameObject);
+        }
+
+        for (int i  = 1; i < _offerCount + 1; i++)
+        {
+            if (i > _offerListPrefabs.Count) continue;
+            var newOffer = Instantiate(_offerListPrefabs[i], _offerContainer);
+            newOffer.UpdateWindow();
         }
 
         RecalculateOfferContainer(_offerCount);

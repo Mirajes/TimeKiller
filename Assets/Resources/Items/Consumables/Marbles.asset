@@ -15,5 +15,7 @@ MonoBehaviour:
   _name: Marbles
   _smallIcon: {fileID: 21300000, guid: d082e353688380e4eb64652d1259068e, type: 3}
   _bigIcon: {fileID: 0}
-  _description: 
+  _description: 'Classic hamburger: sesame seed bun; ground beef patty; fresh tomatoes;
+    pickled cucumbers; onions; lettuce leaves; mayonnaise; ketchup; mustard.'
   _type: 1
+  _adCost: 1

@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 
         GetAdPoint += OnGetAdPoint;
         RemoveAdPoint += OnRemoveAdPoint;
+        BuyItem += OnBuyItem;
 
         if (_START_RUN)
             OnStartRun();
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
 
         GetAdPoint -= OnGetAdPoint;
         RemoveAdPoint -= OnRemoveAdPoint;
+        BuyItem -= OnBuyItem;
 
         _inputHandler.Inputs?.Disable();
         _inputHandler.Inputs?.Dispose();
@@ -111,6 +113,21 @@ public class GameManager : MonoBehaviour
     {
         _adPoints -= amount;
         UIManager.AdPointChange?.Invoke(_adPoints);
+    }
+
+    private void OnBuyItem(SO_Item item)
+    {
+        if (_adPoints >= item.AdCost)
+        {
+            RemoveAdPoint?.Invoke(item.AdCost);
+
+            _uiManager.BuyItem(item);
+            UIManager.Notify?.Invoke($"U bought - {item.Name}", NotificationType.Buy);
+        }
+        else
+        {
+            UIManager.Notify?.Invoke($"u haven't enough, cost is [{item.AdCost}]", NotificationType.Warn);
+        }
     }
 }
 

@@ -14,6 +14,6 @@ public class UI_HealthBar : MonoBehaviour
         float value = current / max;
         
         _healthFill.fillAmount = value;
-        _healthText.text = $"{current.ToString("F0")}/{max}";
+        _healthText.text = $"{current:F0}/{max}";
     }
 }
